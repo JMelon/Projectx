@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group 'org.projectx.framework'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '15'
+targetCompatibility = '15'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.7.0'
+    testImplementation group: 'io.github.bonigarcia', name: 'selenium-jupiter', version: '3.3.5'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.3.1'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.17.2'
+    testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
+    testImplementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.2'
+}
+
+tasks.named('wrapper') {
+    gradleVersion = '6.6.1'
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+test {
+    useJUnitPlatform()
+}
