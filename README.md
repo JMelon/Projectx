@@ -29,6 +29,7 @@ List of implemented capabilities linking to wiki where detailed usage is describ
             |-- java
                 |-- tests <- Container for test, structuring inside is important
                 |-- pojo <- Object repository for general use, each feature has it's own object repo
+                |-- devops <- Run, deployment, ci or any other devops related scripts
                 |-- util <- The core the framework 
                     |-- configuration <- Configuration management capability
                     |-- ui <- Selenium capability
