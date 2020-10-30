@@ -28,6 +28,7 @@ List of implemented capabilities linking to wiki where detailed usage is describ
             |-- resources <- Configuration location
             |-- java
                 |-- tests <- Container for test, structuring inside is important
+                |-- devops <- DevOps related files e.g. CI scripts
                 |-- pojo <- Object repository for general use, each feature has it's own object repo
                 |-- util <- The core the framework 
                     |-- configuration <- Configuration management capability

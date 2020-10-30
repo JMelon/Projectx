@@ -10,6 +10,8 @@ public class TestSuite {
     @Test
     public void TestCase() {
         LocalTime time = LocalTime.now();
-        System.out.println("Hello world, it's " + time.format(DateTimeFormatter.ofPattern("HH:mm:ss")) + " o'clock");
+        System.out.println("Hello world, it's "
+                + time.format(DateTimeFormatter.ofPattern("HH:mm:ss"))
+                + " o'clock");
     }
 }

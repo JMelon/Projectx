@@ -9,10 +9,18 @@ targetCompatibility = '15'
 
 repositories {
     mavenCentral()
+    jcenter()
+}
+
+// Compatibility for Estonian Alphabet
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.7.0'
+    testImplementation group: 'org.junit.platform', name: 'junit-platform-console', version: '1.7.0'
     testImplementation group: 'io.github.bonigarcia', name: 'selenium-jupiter', version: '3.3.5'
     testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.3.1'
     testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.17.2'
@@ -21,11 +29,30 @@ dependencies {
     testImplementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.2'
 }
 
+// Task for keeping and upgrading specific gradle version
 tasks.named('wrapper') {
     gradleVersion = '6.6.1'
     distributionType = Wrapper.DistributionType.ALL
 }
 
+// Task for launching jUnit tests with console launcher
+task consoleLauncherTest(type: JavaExec) {
+    dependsOn testClasses
+    def reportsDir = file("$buildDir/test-results")
+    outputs.dir(reportsDir)
+    classpath = sourceSets["test"].runtimeClasspath
+    main = "org.junit.platform.console.ConsoleLauncher"
+    args("--scan-classpath")
+    args("--details", "tree")
+    args("--reports-dir", reportsDir)
+}
+
 test {
+    // run tests even if code is up-to-date
+    dependsOn 'cleanTest'
+
     useJUnitPlatform()
+    testLogging{
+        events "STARTED", "PASSED", "SKIPPED", "FAILED", "STANDARD_OUT", "STANDARD_ERROR"
+    }
 }
